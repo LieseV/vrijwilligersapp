@@ -1,10 +1,20 @@
 document.getElementById("availability-form").addEventListener("submit", function (e) {
   e.preventDefault();
+
   const name = document.getElementById("name").value.trim();
-  const checkboxes = document.querySelectorAll("#days input[type='checkbox']");
+
+  const dayCheckboxes = document.querySelectorAll("input[name='day']");
+  const prefCheckboxes = document.querySelectorAll("input[name='preference']");
+
   const selectedDays = [];
-  checkboxes.forEach((cb) => {
+  const preferences = [];
+
+  dayCheckboxes.forEach((cb) => {
     if (cb.checked) selectedDays.push(cb.value);
+  });
+
+  prefCheckboxes.forEach((cb) => {
+    if (cb.checked) preferences.push(cb.value);
   });
 
   if (!name || selectedDays.length === 0) {
@@ -13,7 +23,7 @@ document.getElementById("availability-form").addEventListener("submit", function
   }
 
   const data = JSON.parse(localStorage.getItem("availability") || "[]");
-  data.push({ name, days: selectedDays });
+  data.push({ name, days: selectedDays, preferences });
   localStorage.setItem("availability", JSON.stringify(data));
 
   alert("Bedankt voor je inzending!");
