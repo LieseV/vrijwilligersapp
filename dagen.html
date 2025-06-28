@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dagen beheren</title>
+  <script defer src="dagen.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+  <div class="w-full max-w-lg bg-white shadow-md rounded-xl p-6">
+    <h1 class="text-2xl font-bold mb-4 text-blue-700 text-center">Beheer Beschikbare Dagen</h1>
+
+    <div class="flex items-center gap-2 mb-4">
+      <input type="text" id="new-day" placeholder="Bijv. 1 juli 2025" class="border border-gray-300 p-2 rounded w-full" />
+      <button id="add-day" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Voeg toe</button>
+    </div>
+
+    <ul id="day-list" class="space-y-2"></ul>
+  </div>
+</body>
+</html>
