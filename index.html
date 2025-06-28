@@ -6,58 +6,19 @@
   <script defer src="script.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="p-6">
-  <h1 class="text-2xl mb-4">Geef je beschikbaarheid op</h1>
-  <form id="availability-form" class="space-y-4">
-    <input type="text" id="name" placeholder="Je naam" class="border p-2 w-full" required />
+<body class="min-h-screen bg-gray-50 flex flex-col items-center justify-start p-6">
+  <div class="w-full max-w-xl bg-white p-6 rounded-xl shadow">
+    <h1 class="text-3xl font-bold mb-4 text-center text-blue-700">Vrijwilligersformulier</h1>
+    <p class="text-gray-600 mb-6 text-center">Vink aan wanneer je beschikbaar bent en geef je voorkeuren aan met een ster ⭐</p>
 
-    <div id="days" class="space-y-2">
-      <!-- Elke dag heeft nu 2 checkboxen: beschikbaar + voorkeur -->
-      <div>
-        <label>
-          <input type="checkbox" name="day" value="Maandag"> Maandag
-        </label>
-        <label class="ml-4 text-sm text-gray-600">
-          <input type="checkbox" name="preference" value="Maandag"> voorkeur
-        </label>
-      </div>
+    <form id="availability-form" class="space-y-6">
+      <input type="text" id="name" placeholder="Je naam" class="border border-gray-300 p-2 w-full rounded" required />
 
-      <div>
-        <label>
-          <input type="checkbox" name="day" value="Dinsdag"> Dinsdag
-        </label>
-        <label class="ml-4 text-sm text-gray-600">
-          <input type="checkbox" name="preference" value="Dinsdag"> voorkeur
-        </label>
-      </div>
+      <div id="days" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <!-- Herhaal voor elke dag -->
+        <div class="flex items-center justify-between bg-gray-100 p-3 rounded">
+          <label class="fl
 
-      <div>
-        <label>
-          <input type="checkbox" name="day" value="Woensdag"> Woensdag
-        </label>
-        <label class="ml-4 text-sm text-gray-600">
-          <input type="checkbox" name="preference" value="Woensdag"> voorkeur
-        </label>
-      </div>
-
-      <div>
-        <label>
-          <input type="checkbox" name="day" value="Donderdag"> Donderdag
-        </label>
-        <label class="ml-4 text-sm text-gray-600">
-          <input type="checkbox" name="preference" value="Donderdag"> voorkeur
-        </label>
-      </div>
-
-      <div>
-        <label>
-          <input type="checkbox" name="day" value="Vrijdag"> Vrijdag
-        </label>
-        <label class="ml-4 text-sm text-gray-600">
-          <input type="checkbox" name="preference" value="Vrijdag"> voorkeur
-        </label>
-      </div>
-    </div>
 
     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Verzend</button>
   </form>
