@@ -10,13 +10,55 @@
   <h1 class="text-2xl mb-4">Geef je beschikbaarheid op</h1>
   <form id="availability-form" class="space-y-4">
     <input type="text" id="name" placeholder="Je naam" class="border p-2 w-full" required />
+
     <div id="days" class="space-y-2">
-      <label><input type="checkbox" value="Maandag"> Maandag</label><br>
-      <label><input type="checkbox" value="Dinsdag"> Dinsdag</label><br>
-      <label><input type="checkbox" value="Woensdag"> Woensdag</label><br>
-      <label><input type="checkbox" value="Donderdag"> Donderdag</label><br>
-      <label><input type="checkbox" value="Vrijdag"> Vrijdag</label>
+      <!-- Elke dag heeft nu 2 checkboxen: beschikbaar + voorkeur -->
+      <div>
+        <label>
+          <input type="checkbox" name="day" value="Maandag"> Maandag
+        </label>
+        <label class="ml-4 text-sm text-gray-600">
+          <input type="checkbox" name="preference" value="Maandag"> voorkeur
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" name="day" value="Dinsdag"> Dinsdag
+        </label>
+        <label class="ml-4 text-sm text-gray-600">
+          <input type="checkbox" name="preference" value="Dinsdag"> voorkeur
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" name="day" value="Woensdag"> Woensdag
+        </label>
+        <label class="ml-4 text-sm text-gray-600">
+          <input type="checkbox" name="preference" value="Woensdag"> voorkeur
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" name="day" value="Donderdag"> Donderdag
+        </label>
+        <label class="ml-4 text-sm text-gray-600">
+          <input type="checkbox" name="preference" value="Donderdag"> voorkeur
+        </label>
+      </div>
+
+      <div>
+        <label>
+          <input type="checkbox" name="day" value="Vrijdag"> Vrijdag
+        </label>
+        <label class="ml-4 text-sm text-gray-600">
+          <input type="checkbox" name="preference" value="Vrijdag"> voorkeur
+        </label>
+      </div>
     </div>
+
     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Verzend</button>
   </form>
 </body>
