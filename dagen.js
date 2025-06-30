@@ -1,4 +1,3 @@
-// Laad de bestaande dagen uit localStorage en toon ze
 function loadDays() {
   const days = JSON.parse(localStorage.getItem("availableDays") || "[]");
   const list = document.getElementById("day-list");
@@ -17,11 +16,27 @@ function loadDays() {
   });
 }
 
-// Voeg een nieuwe dag toe
 function addDay() {
   const input = document.getElementById("new-day");
   const newDay = input.value.trim();
   if (!newDay) return;
 
   const days = JSON.parse(localStorage.getItem("availableDays") || "[]");
-  d
+  days.push(newDay);
+  localStorage.setItem("availableDays", JSON.stringify(days));
+
+  input.value = "";
+  loadDays();
+}
+
+function removeDay(index) {
+  const days = JSON.parse(localStorage.getItem("availableDays") || "[]");
+  days.splice(index, 1);
+  localStorage.setItem("availableDays", JSON.stringify(days));
+  loadDays();
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("add-day").addEventListener("click", addDay);
+  loadDays();
+});
