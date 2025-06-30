@@ -2,20 +2,37 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8" />
-  <title>Dagen beheren</title>
-  <script defer src="dagen.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beheer Dagen</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script defer src="dagen.js"></script>
 </head>
-<body class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
-  <div class="w-full max-w-lg bg-white shadow-md rounded-xl p-6">
-    <h1 class="text-2xl font-bold mb-4 text-blue-700 text-center">Beheer Beschikbare Dagen</h1>
+<body class="bg-gray-100 text-gray-800 font-sans">
+  <div class="max-w-xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">🛠 Beheer Dagen</h1>
 
-    <div class="flex items-center gap-2 mb-4">
-      <input type="text" id="new-day" placeholder="Bijv. 1 juli 2025" class="border border-gray-300 p-2 rounded w-full" />
-      <button id="add-day" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Voeg toe</button>
+    <div class="flex gap-2 mb-4">
+      <input
+        type="text"
+        id="new-day"
+        placeholder="Bijv. 1 juli 2025"
+        class="flex-grow px-3 py-2 border rounded"
+      />
+      <button
+        id="add-day"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+      >
+        ➕ Voeg toe
+      </button>
     </div>
 
-    <ul id="day-list" class="space-y-2"></ul>
+    <ul id="day-list" class="space-y-2">
+      <!-- Hier komen de dagen -->
+    </ul>
+
+    <div class="mt-6">
+      <a href="index.html" class="text-blue-600 hover:underline">← Terug naar overzicht</a>
+    </div>
   </div>
 </body>
 </html>
