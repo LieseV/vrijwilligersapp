@@ -23,12 +23,11 @@ function loadDays() {
     form.appendChild(div);
   });
 
-  // Alleen als dag aangeduid is, mag voorkeur geselecteerd worden
-  form.querySelectorAll(".day-checkbox").forEach((dayCheckbox) => {
-    const prefCheckbox = form.querySelector(`#pref-${dayCheckbox.id}`);
-    dayCheckbox.addEventListener("change", () => {
-      prefCheckbox.disabled = !dayCheckbox.checked;
-      if (!dayCheckbox.checked) prefCheckbox.checked = false;
+  form.querySelectorAll(".day-checkbox").forEach((checkbox) => {
+    const prefCheckbox = form.querySelector(`#pref-${checkbox.id}`);
+    checkbox.addEventListener("change", () => {
+      prefCheckbox.disabled = !checkbox.checked;
+      if (!checkbox.checked) prefCheckbox.checked = false;
     });
   });
 }
@@ -63,12 +62,36 @@ function submitAvailability() {
   document.getElementById("volunteer-name").value = "";
   document.querySelectorAll("input[type='checkbox']").forEach((el) => {
     el.checked = false;
-    el.disabled = el.classList.contains("preference-checkbox"); // reset disable
+    el.disabled = el.classList.contains("preference-checkbox");
   });
 }
 
+// 🔐 Admin login logic
+const ADMIN_PASSWORD = "vzwHippofarm1"; // ← verander dit wachtwoord indien gewenst
+
+function checkAdminAccess() {
+  const hasAccess = localStorage.getItem("adminAccess") === "true";
+  if (hasAccess) {
+    document.getElementById("admin-section").classList.remove("hidden");
+  }
+}
+
+document.getElementById("admin-login").addEventListener("click", () => {
+  const pw = prompt("Wachtwoord voor admin-toegang:");
+  if (pw === ADMIN_PASSWORD) {
+    localStorage.setItem("adminAccess", "true");
+    document.getElementById("admin-section").classList.remove("hidden");
+    alert("Admin toegang verleend ✅");
+  } else {
+    alert("Fout wachtwoord ❌");
+  }
+});
+
 window.addEventListener("DOMContentLoaded", () => {
   loadDays();
-  document.getElementById("submit-availability").addEventListener("click", submitAvailability);
+  document
+    .getElementById("submit-availability")
+    .addEventListener("click", submitAvailability);
+  checkAdminAccess();
 });
 
