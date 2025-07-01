@@ -1,47 +1,67 @@
-function loadResponses() {
+function groupByDay(responses) {
+  const grouped = {};
+
+  responses.forEach((entry) => {
+    entry.days.forEach((d) => {
+      if (!grouped[d.day]) {
+        grouped[d.day] = [];
+      }
+      grouped[d.day].push({
+        name: entry.name,
+        preferred: d.preferred,
+      });
+    });
+  });
+
+  return grouped;
+}
+
+function loadOverview() {
   const responses = JSON.parse(localStorage.getItem("responses") || "[]");
-  const tableBody = document.getElementById("response-table");
-  tableBody.innerHTML = "";
+  const availableDays = JSON.parse(localStorage.getItem("availableDays") || "[]");
+  const container = document.getElementById("day-overview");
+  container.innerHTML = "";
 
   if (responses.length === 0) {
-    const row = document.createElement("tr");
-    row.innerHTML = `<td class="border px-4 py-2 italic text-gray-500" colspan="2">Geen gegevens gevonden.</td>`;
-    tableBody.appendChild(row);
+    container.innerHTML = `<p class="italic text-gray-500">Geen gegevens beschikbaar.</p>`;
     return;
   }
 
-  responses.forEach((entry) => {
-    const row = document.createElement("tr");
+  const grouped = groupByDay(responses);
 
-    const nameCell = document.createElement("td");
-    nameCell.className = "border px-4 py-2 font-medium";
-    nameCell.textContent = entry.name;
+  availableDays.forEach((day) => {
+    const section = document.createElement("div");
 
-    const daysCell = document.createElement("td");
-    daysCell.className = "border px-4 py-2";
+    section.innerHTML = `
+      <h2 class="text-lg font-semibold mb-2">${day}</h2>
+      <ul class="list-disc list-inside space-y-1">
+        ${
+          grouped[day]
+            ? grouped[day]
+                .map((entry) =>
+                  entry.preferred
+                    ? `<li>⭐ ${entry.name} <span class="text-sm text-gray-500">(voorkeur)</span></li>`
+                    : `<li>${entry.name}</li>`
+                )
+                .join("")
+            : `<li class="text-gray-500 italic">Niemand beschikbaar</li>`
+        }
+      </ul>
+    `;
 
-    const list = entry.days
-      .map((d) =>
-        d.preferred ? `⭐ ${d.day}` : d.day
-      )
-      .join(", ");
-
-    daysCell.textContent = list;
-
-    row.appendChild(nameCell);
-    row.appendChild(daysCell);
-    tableBody.appendChild(row);
+    container.appendChild(section);
   });
 }
 
 function clearAllResponses() {
-  if (confirm("Ben je zeker dat je alle gegevens wilt verwijderen?")) {
+  if (confirm("Ben je zeker dat je alles wilt wissen?")) {
     localStorage.removeItem("responses");
-    loadResponses();
+    loadOverview();
   }
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  loadResponses();
+  loadOverview();
   document.getElementById("clear-data").addEventListener("click", clearAllResponses);
 });
+
