@@ -21,7 +21,7 @@
 
     <p class="text-sm font-medium mb-2">Welke dagen kan je?</p>
     <form id="availability-form" class="space-y-2 mb-4">
-      <!-- Dagen en checkboxes worden hier geladen -->
+      <!-- Dynamisch gegenereerde checkboxen -->
     </form>
 
     <button
@@ -31,12 +31,19 @@
       ✅ Verstuur beschikbaarheid
     </button>
 
-    <div class="mt-6 text-center">
+    <div class="mt-6 flex flex-col sm:flex-row sm:justify-center gap-2 text-center">
       <a
         href="dagen.html"
-        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded inline-block text-sm"
+        class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-2 rounded text-sm"
       >
         🔧 Beheer dagen (admin)
+      </a>
+
+      <a
+        href="overzicht.html"
+        class="bg-blue-200 hover:bg-blue-300 text-blue-800 px-4 py-2 rounded text-sm"
+      >
+        📋 Overzicht beschikbaarheid
       </a>
     </div>
   </div>
