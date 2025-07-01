@@ -19,7 +19,14 @@ function loadResponses() {
 
     const daysCell = document.createElement("td");
     daysCell.className = "border px-4 py-2";
-    daysCell.textContent = entry.days.join(", ");
+
+    const list = entry.days
+      .map((d) =>
+        d.preferred ? `⭐ ${d.day}` : d.day
+      )
+      .join(", ");
+
+    daysCell.textContent = list;
 
     row.appendChild(nameCell);
     row.appendChild(daysCell);
