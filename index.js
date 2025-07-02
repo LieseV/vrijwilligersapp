@@ -1,4 +1,4 @@
-const ADMIN_PASSWORD = "geheim123";
+const ADMIN_PASSWORD = "vzwHippofarm1";
 
 // ✅ Dagen laden in het formulier
 function loadDays() {
