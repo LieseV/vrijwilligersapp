@@ -1,5 +1,6 @@
-const ADMIN_PASSWORD = "vzwHippofarm1";
+const ADMIN_PASSWORD = "geheim123";
 
+// ✅ Dagen laden in het formulier
 function loadDays() {
   const days = JSON.parse(localStorage.getItem("availableDays") || "[]");
   const form = document.getElementById("availability-form");
@@ -26,6 +27,7 @@ function loadDays() {
     form.appendChild(div);
   });
 
+  // 🧠 Zorg dat voorkeur pas aanklikbaar is als dag is aangeklikt
   form.querySelectorAll(".day-checkbox").forEach((checkbox) => {
     const prefCheckbox = form.querySelector(`#pref-${checkbox.id}`);
     checkbox.addEventListener("change", () => {
@@ -35,6 +37,7 @@ function loadDays() {
   });
 }
 
+// ✅ Beschikbaarheid opslaan
 function submitAvailability() {
   const name = document.getElementById("volunteer-name").value.trim();
   const code = document.getElementById("volunteer-code").value.trim();
@@ -83,6 +86,7 @@ function submitAvailability() {
   });
 }
 
+// ✅ Admin toegang controleren
 function checkAdminAccess() {
   const hasAccess = localStorage.getItem("adminAccess") === "true";
   if (hasAccess) {
@@ -93,6 +97,7 @@ function checkAdminAccess() {
   }
 }
 
+// ✅ Admin login opzetten
 function setupAdminLogin() {
   const loginBtn = document.getElementById("admin-login");
   if (!loginBtn) return;
@@ -109,6 +114,40 @@ function setupAdminLogin() {
   });
 }
 
+// ✅ Eerder ingevulde beschikbaarheid automatisch tonen
+function preloadUserData() {
+  const name = document.getElementById("volunteer-name").value.trim();
+  const code = document.getElementById("volunteer-code").value.trim();
+
+  if (!name || !code) return;
+
+  const responses = JSON.parse(localStorage.getItem("responses") || "[]");
+  const entry = responses.find((r) => r.name === name && r.code === code);
+  if (!entry) return;
+
+  // Vink alles leeg
+  document.querySelectorAll(".day-checkbox").forEach((cb) => {
+    cb.checked = false;
+  });
+  document.querySelectorAll(".preference-checkbox").forEach((cb) => {
+    cb.checked = false;
+    cb.disabled = true;
+  });
+
+  // Herstel oude selectie
+  entry.days.forEach(({ day, preferred }) => {
+    const id = `day-${day.replace(/\s+/g, "-")}`;
+    const cb = document.getElementById(id);
+    const pref = document.getElementById(`pref-${id}`);
+    if (cb) cb.checked = true;
+    if (pref) {
+      pref.disabled = false;
+      pref.checked = preferred;
+    }
+  });
+}
+
+// ✅ Alles opstarten zodra de pagina geladen is
 window.addEventListener("DOMContentLoaded", () => {
   loadDays();
   setupAdminLogin();
@@ -118,5 +157,11 @@ window.addEventListener("DOMContentLoaded", () => {
   if (submitBtn) {
     submitBtn.addEventListener("click", submitAvailability);
   }
-});
 
+  // Reageer op naam of code-invulling om automatisch data te laden
+  const nameInput = document.getElementById("volunteer-name");
+  const codeInput = document.getElementById("volunteer-code");
+  [nameInput, codeInput].forEach((input) => {
+    input.addEventListener("input", preloadUserData);
+  });
+});
